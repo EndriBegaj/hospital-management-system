@@ -29,13 +29,13 @@ public class Patient {
     private String address;
     private String city;
     private String country;
-    private String symptoms;
     private String notes;
     private char gender;
     private LocalDate birthDate;
     private boolean active;
     private String photo;
     private String nationality;
+
 
 
 

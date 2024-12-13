@@ -1,10 +1,21 @@
+/*
 package dev.endribegaj.hospitalmanagementsystem.models;
 
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Appointment {
 
@@ -13,21 +24,19 @@ public class Appointment {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
+    private LocalDate date;
+    private LocalTime time;
 
-    private LocalDateTime appointmentDate;
 
-    @Enumerated(EnumType.STRING)
-    private AppointmentStatus status;
+
+    private String status; // "Scheduled", "Completed", "Cancelled"
+
+    private String notes;
 
     // Getters and setters
-
-    public enum AppointmentStatus {
-        SCHEDULED, CANCELED, COMPLETED
-    }
 }
+*/

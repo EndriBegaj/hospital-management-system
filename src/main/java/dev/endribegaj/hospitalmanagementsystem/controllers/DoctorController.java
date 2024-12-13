@@ -82,7 +82,7 @@ public class DoctorController {
             return "doctors/create";
 
         }
-        redirectAttributes.addFlashAttribute("successMessage", "Driver added successfully");
+        redirectAttributes.addFlashAttribute("successMessage", "Doctor added successfully");
         return "redirect:/doctors";
 
 

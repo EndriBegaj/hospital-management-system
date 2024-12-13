@@ -9,9 +9,9 @@
     <p>Show <b th:text="${title}"></b>  here</p>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Register New Doctors</h5>
+            <h5 class="card-title">Register New Patient</h5>
 
-            <form th:object="${doctor}" method="post" id="doctorFrom" enctype="multipart/form-data">
+            <form th:object="${patient}" method="post" id="patientFrom" enctype="multipart/form-data">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="row mb-3">
                     <label for="personal" class="col-sm-1 col-form-label">Personal No:</label>
@@ -45,15 +45,6 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="specialization" class="col-sm-1 col-form-label">Specialization:</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" th:field="*{specialization}" required minlength="2" maxlength="50"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <span class="text-danger" th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}"></span>
-                    </div>
-                </div>
 
                 <div class="row mb-3">
                     <label for="country" class="col-sm-1 col-form-label">Country</label>
@@ -64,15 +55,7 @@
                         <span class="text-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="postalCode" class="col-sm-1 col-form-label">Postal Code</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" th:field="*{postalCode}"/>
-                    </div>
-                    <div class="col-sm-6">
-                        <span class="text-danger" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
-                    </div>
-                </div>
+
                 <div class="row mb-3">
                     <label for="phoneNumber" class="col-sm-1 col-form-label">Phone Number</label>
                     <div class="col-sm-5">
@@ -114,6 +97,20 @@
                 </div>
 
 
+                <div class="row mb-3">
+                    <label for="city" class="col-sm-1 col-form-label">Doctor:</label>
+                    <div class="col-sm-5">
+                    <select name="doctor" class="form-select" aria-label="Select Doctor">
+                        <option value="" disabled selected>Select a doctor</option>
+                        <!-- Populate dropdown with doctors -->
+                        <th:block th:each="doctor : ${doctors}">
+                            <option th:value="${doctor.id}" th:text="${doctor.firstName} + ' ' + ${doctor.lastName}"></option>
+                        </th:block>
+                    </select>
+                    </div>
+                </div>
+
+
 
                 <div class="row mb-3">
                     <label for="gender" class="col-sm-1 col-form-label">Gender:</label>
@@ -139,7 +136,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+             <!--   <div class="row mb-3">
                     <label class="col-sm-1 col-form-label" for="active">Photo</label>
                     <div class="col-sm-5">
                         <div class="form-check form-switch">
@@ -148,7 +145,7 @@
                             >
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label" for="birthDate">Birthdate</label>

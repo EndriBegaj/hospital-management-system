@@ -1,0 +1,30 @@
+<html lang="en" th:replace="~{shared/_layout::layout('Edit Page', '', ~{::div#naja}, '', ~{::ol.breadcrumb})}">
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+
+<div id="naja">
+    <p>Show <b th:text="${title}"></b>  here</p>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Modify the Driver</h5>
+
+            <th:block th:replace="~{/patients/create.html::#patientFrom}" th:if="${patient!=null}">
+
+            </th:block>
+
+            <div th:unless="${patient!=null}">
+                <div class="alert alert-danger" role="alert">
+                    Patient not found
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+</html>

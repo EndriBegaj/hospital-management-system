@@ -28,6 +28,12 @@
                 <a th:href="@{/doctors/create}" class="btn btn-primary btn-sm">+ Add New Doctor</a>
                 <hr />
             </div>
+            <!--<div class="row col-2">
+            <form action="#" method="get" class="d-flex">
+                <input type="text" class="form-control form-control-sm" name="search" placeholder="Search doctors..." />
+                <button type="submit" class="btn btn-outline-secondary btn-sm ms-2">Search</button>
+            </form>
+            </div>-->
 
             <div class="row col" th:unless="${doctors != null && doctors.size() > 0}">
                 <div class="alert alert-warning" role="alert">
