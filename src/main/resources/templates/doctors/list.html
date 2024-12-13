@@ -1,0 +1,74 @@
+<html lang="en" th:replace="~{shared/_layout::layout('Doctors List', '', ~{::div#naja}, '', ~{::ol.breadcrumb})}">
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a th:href="@{/}">Dashboard</a></li>
+    <li class="breadcrumb-item active">Doctors List</li>
+</ol>
+
+<div id="naja">
+    <p>Show <b th:text="${title}"></b> here</p>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${errorMessage != null}">
+        <i class="bi bi-exclamation-triangle me-1"></i>
+        <strong th:text="${errorMessage}"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${successMessage != null}">
+        <i class="bi bi-check-circle me-1"></i>
+        <strong th:text="${successMessage}"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">List of Doctors</h5>
+
+            <div class="row col-2">
+                <a th:href="@{/doctors/create}" class="btn btn-primary btn-sm">+ Add New Doctor</a>
+                <hr />
+            </div>
+
+            <div class="row col" th:unless="${doctors != null && doctors.size() > 0}">
+                <div class="alert alert-warning" role="alert">
+                    <strong>There are no doctors in the system!</strong>
+                </div>
+            </div>
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover" th:if="${doctors != null && doctors.size() > 0}">
+                <thead>
+                <tr>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Full name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Specialization</th>
+                    <th scope="col">(action)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="doctor : ${doctors}">
+                    <th scope="row">
+                        <img th:src="${doctor.photo}" th:alt="*{'NO PICTURE FOR ID ' + doctor.id}" class="img-thumbnail" style="width: 60px; height: 60px;" />
+                    </th>
+                    <td>
+                        <span th:text="${doctor.firstName}"></span> &nbsp;
+                        <span th:text="${doctor.lastName}"></span>
+                    </td>
+                    <td th:text="${doctor.gender}"></td>
+                    <td th:text="${doctor.specialization}"></td>
+                    <td>
+                        <a th:href="@{/doctors/{id}/details(id=${doctor.id})}" class="btn btn-secondary btn-sm">Details</a>
+                        <a th:href="@{/doctors/{id}/edit(id=${doctor.id})}" class="btn btn-primary btn-sm">Edit</a>
+                        <a th:href="@{/doctors/{id}/delete(id=${doctor.id})}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+        </div>
+    </div>
+</div>
+
+
