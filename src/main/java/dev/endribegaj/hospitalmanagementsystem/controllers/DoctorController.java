@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 
 @Controller
@@ -26,10 +26,8 @@ public class DoctorController {
     }
 
     @GetMapping("")
-    public String index(Model model) {
-        List<Doctor> doctors = service.findAll();
-        System.out.println("Doctors list size: " + doctors.size());  // Check if there are doctors
-        model.addAttribute("doctors", doctors);
+    public String doctors(Model model) {
+        model.addAttribute("doctors", service.findAll());
         return "doctors/list";
     }
 
@@ -105,6 +103,8 @@ public class DoctorController {
         service.deleteById(id);
         return "redirect:/doctors";
     }
+
+
 
 
 

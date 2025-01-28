@@ -57,4 +57,8 @@ public class Doctor {
     private String country;
 
     private String postalCode;
+
+    @OneToOne(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private Patient patient;
+
 }

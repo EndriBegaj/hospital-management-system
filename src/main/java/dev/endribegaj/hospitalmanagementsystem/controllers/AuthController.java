@@ -37,6 +37,7 @@ public class AuthController {
         return "auths/login";
     }
 
+
     @PostMapping("/login")
     public String login(
             @Valid @ModelAttribute LoginRequestDto loginRequestDto, BindingResult bindingResult
@@ -97,7 +98,7 @@ public class AuthController {
             session.invalidate();
         }
 
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/register")

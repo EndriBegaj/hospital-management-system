@@ -12,9 +12,13 @@ public class HomeController {
 
 
     @GetMapping("")
-    public String home(){
-        return "index";
+    public String home(HttpServletRequest request, HttpServletResponse response, Model model) {
+        return "page/index";
     }
 
+    @GetMapping("/index")
+    public String index(HttpServletRequest request, HttpServletResponse response, Model model) {
+        return "index";
+    }
 
 }

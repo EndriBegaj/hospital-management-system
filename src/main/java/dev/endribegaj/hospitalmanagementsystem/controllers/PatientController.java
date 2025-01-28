@@ -27,13 +27,17 @@ public class PatientController {
         this.doctorService = doctorService;
     }
 
-    @GetMapping("/")
-    public String index(Model model) {
-        List<Patient> patients = patientService.findAll();
-        model.addAttribute("patients", patients);
-        System.out.println("Patients list size: " + patientService.findAll().size());
-
+    @GetMapping("")
+    public String patients(Model model) {
+        model.addAttribute("patients", patientService.findAll());
         return "patients/list";
+    }
+
+    @GetMapping("/{id}/details")
+    public String showPatientDetails(@PathVariable long id, Model model) {
+        var patient = patientService.findById(id);
+        model.addAttribute("patient", patient);
+        return "patients/details";
     }
 
     @GetMapping("/create")
@@ -46,16 +50,18 @@ public class PatientController {
 
     @GetMapping("/{id}/edit")
     public String showEditPatientForm(@PathVariable long id, Model model) {
-        Patient patient = patientService.findById(id);
+        var patient = patientService.findById(id);
         model.addAttribute("patient", patient);
         return "patients/edit";
     }
-    @GetMapping("/{id}/details")
-    public String showPatientDetails(@PathVariable long id, Model model) {
-        Patient patient = patientService.findById(id);
+
+    @GetMapping("/{id}/delete")
+    public String deletePatient(@PathVariable long id,Model model) {
+        var patient = patientService.findById(id);
         model.addAttribute("patient", patient);
-        return "patients/details";
+        return "patients/delete";
     }
+
 
     @PostMapping("/create")
     public String addPatient(@Valid @ModelAttribute Patient patient, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -65,7 +71,7 @@ public class PatientController {
         }
         var newPatient = patientService.add(patient);
         if (newPatient == null) {
-            bindingResult.rejectValue("personalNo", "error.driver", "Patient already exists with that personal number");
+            bindingResult.rejectValue("personalNo", "error.patient", "Patient already exists with that personal number");
             bindingResult.rejectValue("email", "error.driver", "Patient already exists with that email");
             return "patients/create";
         }
@@ -73,6 +79,22 @@ public class PatientController {
         return "redirect:/patients";
     }
 
+    @PostMapping("/{id}/edit")
+    public String modifyPatient(@PathVariable long id, @Valid @ModelAttribute Patient patient, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (patient.getId() != id) {
+            redirectAttributes.addAttribute("errorId","DR404");
+            redirectAttributes.addFlashAttribute("errorMessage", "Patient ID does not match");
+            return "redirect:/patients";
+        }
+        patientService.modify(patient);
+        return "redirect:/patients";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deletePatient(@PathVariable long id) {
+        patientService.deleteById(id);
+        return "redirect:/patients";
+    }
 
 
 

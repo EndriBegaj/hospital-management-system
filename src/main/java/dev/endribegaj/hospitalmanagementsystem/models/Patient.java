@@ -37,6 +37,11 @@ public class Patient {
     private String nationality;
 
 
+    @OneToOne()
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+
+
 
 
 }

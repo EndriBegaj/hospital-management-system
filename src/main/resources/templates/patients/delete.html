@@ -1,0 +1,20 @@
+<html lang="en" th:replace="~{shared/_layout::layout('Delete Page', '', ~{::div#naja}, '', ~{::ol.breadcrumb})}">
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+
+<div id="naja">
+    <p>Show <b th:text="${title}"></b>  here</p>
+    <th:block th:replace="~{/patients/details.html::#patientDetails}"></th:block>
+    <div class="row">
+        <div class="col">
+            <form method="post">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</html>
