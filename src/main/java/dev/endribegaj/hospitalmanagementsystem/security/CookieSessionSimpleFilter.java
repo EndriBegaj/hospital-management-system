@@ -11,81 +11,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
+import java.util.Set;
 @Configuration
 public class CookieSessionSimpleFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,  HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
-
+        // Allow asset requests
         if (request.getRequestURI().contains("/assets")) {
             filterChain.doFilter(request, response);
-            return; // return to stop the execution of the method
-        }
-        if (request.getRequestURI().equals("/") || request.getRequestURI().equals("/templates/page/index.html")) {
-            filterChain.doFilter(request, response);
             return;
         }
 
+        // Allowed paths that do not require authentication
+        Set<String> allowedPaths = Set.of("/", "/page/create");
 
-
-
-/*
-        if (request.getRequestURI().startsWith("/api/v1")) {
+        if (allowedPaths.contains(request.getRequestURI())) {
             filterChain.doFilter(request, response);
-            return;
-        }*/
-
-//        System.out.println(request.getMethod() + " -> " + request.getRequestURI());
-
-
-//        Cookie[] cookies = request.getCookies();
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals("user-id")) {
-//                    var user = badUserService.findById(Long.parseLong(cookie.getValue()));
-//                    if (user == null) {
-//                        break;
-//                    }
-//                    request.setAttribute("user", user);
-//
-//                    HttpSession session = request.getSession(false);
-//                    if (session == null || session.getAttribute("user") == null) {
-//                        session = request.getSession();
-//                        session.setAttribute("user", user);
-//                    } else {
-//                        var sessionUser = (UserDto) session.getAttribute("user");
-//                        if (!sessionUser.getId().equals(user.getId())) {
-//                            if (!request.getRequestURI().startsWith("/error500"))
-//                                response.sendRedirect("/error500");
-//                            else
-//                                filterChain.doFilter(request, response);
-//                            return;
-//                        }
-//                    }
-//
-////                    long userId = Long.parseLong(cookie.getValue());
-////                    var user = userService.findById(userId);
-////                    if (user == null) {
-////                        break;
-////                    }
-//
-////                    request.setAttribute("user", user);
-//                    // get user model from repository
-//                    //var user = userservice.findById(Long.parseLong(cookie.getValue()));
-//                    // append user to request
-//                    //request.setAttribute("user", user);
-//
-//                    if (!(request.getRequestURI().equals("/login") || request.getRequestURI().equals("/register"))) {
-//                        filterChain.doFilter(request, response);
-//                    } else {
-//                        response.sendRedirect("/");
-//                    }
-//                    return;
-//                }
-//            }
-//        }
+            return;  // Return to stop further execution
+        }
 
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("user") != null) {
@@ -93,17 +39,6 @@ public class CookieSessionSimpleFilter extends OncePerRequestFilter {
                 response.sendRedirect("/");
                 return;
             }
-
-            UserDto userDto = (UserDto) session.getAttribute("user");
-
-            //request.setAttribute("user", userDto);
-//            if(userDto.getRole().equals("ROLE_ADMIN")) {
-//                AdminRoleFilter.doFilter(request, response, filterChain);
-//                return;
-//            } else if(userDto.getRole().equals("ROLE_USER")) {
-//                UserRoleFilter.doFilter(request, response, filterChain);
-//                return;
-//            }
 
             filterChain.doFilter(request, response);
             return;
@@ -114,7 +49,8 @@ public class CookieSessionSimpleFilter extends OncePerRequestFilter {
             return;
         }
 
-//        response.encodeRedirectURL("/login");
+        // Redirect to login if no valid session exists
         response.sendRedirect("/login?returnUrl=" + request.getRequestURI());
     }
 }
+

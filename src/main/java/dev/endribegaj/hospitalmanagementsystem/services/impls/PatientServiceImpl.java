@@ -7,6 +7,7 @@ import dev.endribegaj.hospitalmanagementsystem.services.PatientService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -67,6 +68,13 @@ public class PatientServiceImpl implements PatientService {
 
         repository.deleteById(id);
 
+
+    }
+
+    @Override
+    public Patient findByFirstNameAndLastName(String firstName, String lastName) {
+        Optional<Patient> patient = repository.findByFirstNameAndLastName(firstName, lastName);
+        return patient.orElse(null); // If patient not found, return null
     }
 
 

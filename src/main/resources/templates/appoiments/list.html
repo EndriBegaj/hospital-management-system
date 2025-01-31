@@ -1,0 +1,71 @@
+<html lang="en" th:replace="~{shared/_layout::layout('Appointments List', '', ~{::div#naja}, '', ~{::ol.breadcrumb})}">
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a th:href="@{/}">Dashboard</a></li>
+    <li class="breadcrumb-item active">Appointments List</li>
+</ol>
+
+<div id="naja">
+    <p>Show <b th:text="${title}"></b> here</p>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${errorMessage != null}">
+        <i class="bi bi-exclamation-triangle me-1"></i>
+        <strong th:text="${errorMessage}"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${successMessage != null}">
+        <i class="bi bi-check-circle me-1"></i>
+        <strong th:text="${successMessage}"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">List of Appointments</h5>
+
+            <div class="row col-2">
+                <a th:href="@{/appointments/create}" class="btn btn-primary btn-sm">+ Add New Appointment</a>
+                <hr />
+            </div>
+
+            <div class="row col" th:unless="${appointments != null && appointments.size() > 0}">
+                <div class="alert alert-warning" role="alert">
+                    <strong>There are no appointments in the system!</strong>
+                </div>
+            </div>
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover" th:if="${appointments != null && appointments.size() > 0}">
+                <thead>
+                <tr>
+
+                    <th scope="col">Patient Name</th>
+                    <th scope="col">Doctor Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">(action)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment : ${appointments}">
+                    <th scope="row">
+                        <span th:text="${appointment.firstName}"></span> &nbsp;
+                        <span th:text="${appointment.lastName}"></span>
+                    </th>
+                    <td th:text="${appointment.doctor.firstName} + ' ' + ${appointment.doctor.lastName}"></td>
+                    <td th:text="${appointment.date}"></td>
+                    <td th:text="${appointment.time}"></td>
+                    <td>
+                        <a th:href="@{/appointments/{id}/details(id=${appointment.id})}" class="btn btn-secondary btn-sm">Details</a>
+                        <a th:href="@{/appointments/{id}/edit(id=${appointment.id})}" class="btn btn-primary btn-sm">Edit</a>
+                        <a th:href="@{/appointments/{id}/delete(id=${appointment.id})}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+
+        </div>
+    </div>
+</div>

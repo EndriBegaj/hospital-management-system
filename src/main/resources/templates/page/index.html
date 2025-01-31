@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            background-color: #1E90FF;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            background-color: #005f99;
+        }
+
+        header {
+            background: url('https://th.bing.com/th/id/OIP.25dy_lO6-24Eijy-Lv1j3gHaE8?rs=1&pid=ImgDetMain') no-repeat center center/cover;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        header .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #1E90FF;
+            padding-top: 30px;
+        }
+
+        header p {
+            font-size: 1.4em;
+            color: #005f99;
+        }
+
+        header .btn {
+            background-color: #ffffff;
+            color: #1E90FF;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        header .btn:hover {
+            background-color: #005f99;
+        }
+
+        .carousel {
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+
+        .carousel-content {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .carousel-item {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        #sherbimet {
+            padding: 50px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #sherbimet h2 {
+            font-size: 2.5em;
+            color: #1E90FF;
+            margin-bottom: 30px;
+        }
+
+        .service {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        .service img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .service h3 {
+            font-size: 1.8em;
+            color: #1E90FF;
+        }
+
+        .service p {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        #doktorat {
+            padding: 50px 20px;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+
+        .doktor-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .doktor {
+            width: 22%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .doktor img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .doktor h3 {
+            font-size: 1.5em;
+            color: #1E90FF;
+        }
+
+        .doktor p {
+            color: #666;
+        }
+
+        #termine {
+            padding: 50px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            padding: 30px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 400px;
+            margin-top: 20px;
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: #1E90FF;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+        }
+
+        form button:hover {
+            background-color: #005f99;
+        }
+
+        #reviews {
+            padding: 50px 20px;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+
+        .review {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .client-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+
+        .client-photo img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .review-content {
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .review-content p {
+            font-size: 1.2em;
+        }
+
+        .rating {
+            font-size: 1.5em;
+            color: #FFD700;
+        }
+
+        footer {
+            background-color: #1E90FF;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        footer p {
+            font-size: 1.1em;
+        }
+        #termine {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        h2, h3 {
+            color: #333;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: #444;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        form textarea {
+            resize: vertical;
+        }
+
+        form button {
+            padding: 12px 25px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        #reservationList {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        #reservationList li {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #reservationList li strong {
+            color: #007BFF;
+        }
+
+        #reservationList li span {
+            font-style: italic;
+            color: #888;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#sherbimet">Shërbimet</a></li>
+            <li><a href="#doktorat">Doktorët</a></li>
+            <li><a href="#termine">Rezervoni Termin</a></li>
+            <li><a href="#reviews">Komentet</a></li>
+            <li><a href="/index">Login</a></li>
+        </ul>
+    </nav>
+    <div class="header-content">
+        <h1>HealthCare</h1>
+        <p>Shëndeti juaj është prioriteti ynë. Rezervoni një termin online dhe përfitoni nga shërbimet më të mira.</p>
+        <a href="#termine" class="btn">Rezervoni Termin</a>
+    </div>
+</header>
+
+<section id="home" class="carousel">
+    <div class="carousel-content">
+        <div class="carousel-item" style="background-image: url('https://img.freepik.com/free-photo/young-handsome-physician-medical-robe-with-stethoscope_1303-17818.jpg?t=st=1737990931~exp=1737994531~hmac=7cbb87e0c7cb3743ad9cc5740f95e10a43dae3b275f4b80a4a5a6081376bbada&w=1380');"></div>
+        <div class="carousel-item" style="background-image: url('https://img.freepik.com/free-photo/hands-unrecognizable-female-doctor-writing-form-typing-laptop-keyboard_1098-20374.jpg?t=st=1737991081~exp=1737994681~hmac=c43810d9c82025f176273331756af55eb9fab37369755e725a91c83efeec4e5d&w=1380');"></div>
+        <div class="carousel-item" style="background-image: url('https://img.freepik.com/free-photo/doctor-s-hand-tending-patient_23-2148168440.jpg?t=st=1737991102~exp=1737994702~hmac=dc27416e72218acca2925d5eab4397a4b7eb8698351ea75f764a2319c9eb8ebb&w=1380');"></div>
+    </div>
+</section>
+
+<section id="sherbimet">
+    <h2>Shërbimet që ofrojmë</h2>
+    <div class="service">
+        <img src="https://img.freepik.com/free-photo/portrait-smiling-young-doctors-standing-together-portrait-medical-staff-inside-modern-hospital-smiling-camera_657921-885.jpg?t=st=1737991593~exp=1737995193~hmac=46f20010666eaddeee561267a46a36e5d4dc3d01ea054a7211b8a8e508b9d9e1&w=1380" alt="Konsulta Mjekësore">
+        <h3>Konsulta Mjekësore</h3>
+        <p>Për çdo problem shëndetësor, mund të rezervoni një konsultë me një nga mjekët tanë të kualifikuar.</p>
+    </div>
+    <div class="service">
+        <img src="https://img.freepik.com/free-photo/measuring-pulse-rate-patient_1098-16825.jpg?t=st=1737991632~exp=1737995232~hmac=41183661f35d458963b894bcd41f36e5ee5f826902e6a6a814627dd76b98fa96&w=1380" alt="Kontrolla Regullta">
+        <h3>Kontrolla Regullta</h3>
+        <p>Kontrolloni shëndetin tuaj me vizita të rregullta dhe ekzaminime mjekësore.</p>
+    </div>
+    <div class="service">
+        <img src="https://img.freepik.com/free-photo/man-sitting-psychologist-s-office-talking-about-problems_1157-28351.jpg?t=st=1737991680~exp=1737995280~hmac=6c47cf4de9e7ff891978ae250d103692c5f1e798488e62fc908d6af6334aa96f&w=1380" alt="Psikoterapia">
+        <h3>Psikoterapia</h3>
+        <p>Shërbime të specializuara për shëndetin mendor dhe emocional.</p>
+    </div>
+    <div class="service">
+        <img src="https://img.freepik.com/free-photo/dentist-examining-female-patient-teeth_107420-65309.jpg?t=st=1737991797~exp=1737995397~hmac=332753e2310a0c504965bbd227610da71e8852a5224ce843a20b9c73ba1ecd87&w=1380" alt="Shërbimi Dentar dhe Kirurgjia Orale">
+        <h3>Shërbimi Dentar dhe Kirurgjia Orale</h3>
+        <p>Ofroni trajtime dentare, përfshirë pastrimin e dhëmbëve, mbushjet dhe kirurgjinë orale për ndihmën ndaj problemeve më të komplikuara.</p>
+    </div>
+    <div class="service">
+        <img src="https://img.freepik.com/free-photo/elder-woman-covid-recovery-doing-physical-exercises-with-dumbbell-while-nurse-checks_23-2148847891.jpg?t=st=1737991897~exp=1737995497~hmac=80f04e6f269cf0422d16d4aca6662ea569a22d20f206980ad9aa3ab94329b576&w=1380" alt="Shërbimi i Fizioterapisë">
+        <h3>Shërbimi i Fizioterapisë</h3>
+        <p>Ofroni rehabilitim dhe trajtim të problemeve të lëvizshmërisë përmes fizioterapisë profesionale.</p>
+    </div>
+    <div class="service">
+        <img src="https://img.freepik.com/free-photo/smiling-nutritionist-her-office-she-is-showing-healthy-vegetables-fruits-healthcare-diet-concept-female-nutritionist-with-fruits-working-her-desk_657921-280.jpg?t=st=1737991965~exp=1737995565~hmac=293eb6eba4599b30e731a60452c9c3096f43aec4405f0fe543e664de98924e4b&w=1380" alt="Shërbimi i Ushqyerjes">
+        <h3>Shërbimi i Ushqyerjes</h3>
+        <p>Konsulta dhe plane ushqyerjeje të personalizuara për një shëndet të mirë dhe mirëqenie.</p>
+    </div>
+</section>
+
+<section id="doktorat">
+    <h2>Doktorët Tanë</h2>
+    <div class="doktor-list" th:each="doctor : ${doctors}">
+        <div class="doktor">
+            <img th:src="${doctor.photo}" >
+            <h3 th:text="${doctor.firstName} + ' ' + ${doctor.lastName}"></h3>
+            <p th:text="${doctor.specialization}"></p>
+        </div>
+    </div>
+</section>
+
+
+<section id="termine">
+    <h2>Rezervoni Termin Online</h2>
+    <form id="reservationForm" th:object="${appointment}" method="post">
+        <label for="firtsName">Emri:</label>
+        <input type="text" id="firtsName" th:field="*{firstName}" required>
+
+        <label for="lastName">Mbiemri:</label>
+        <input type="text" id="lastName" th:field="*{lastName}" required>
+
+        <label for="doctor">Zgjedhni Doktorin:</label>
+        <select id="doctor" th:field="*{doctor.id}" required>
+            <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.firstName + ' ' + doctor.lastName}"></option>
+        </select>
+
+        <label for="date">Data:</label>
+        <input type="date" id="date" th:field="*{date}" required>
+
+        <label for="time">Ora:</label>
+        <input type="time" id="time" th:field="*{time}" required>
+
+        <label for="notes">Përshkrimi i Problemit:</label>
+        <textarea id="notes" th:field="*{notes}" rows="4" required></textarea>
+
+        <button type="submit" class="btn">Dërgo Termin</button>
+    </form>
+
+    <h3>Terminet e Rezervuara:</h3>
+    <ul id="reservationList">
+        <li th:each="appointment : ${appointments}">
+            <span th:text="${appointment.firstName}"></span> -
+            <span th:text="${appointment.lastName}"></span> -
+            <span th:text="${appointment.doctor.firstName + ' ' + appointment.doctor.lastName}"></span> -
+            <span th:text="${appointment.date}"></span> -
+            <span th:text="${appointment.time}"></span> -
+            <span th:text="${appointment.notes}"></span>
+        </li>
+    </ul>
+</section>
+
+<script>
+    document.getElementById("reservationForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const emri = document.getElementById("emri").value;
+        const doktor = document.getElementById("doktor").value;
+        const data = document.getElementById("data").value;
+        const problemi = document.getElementById("problemi").value;
+
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${emri}</strong> rezervoi një termin me ${doktor} për datën ${data}. <br> Problemi: ${problemi}`;
+
+        document.getElementById("reservationList").appendChild(li);
+
+
+        document.getElementById("reservationForm").reset();
+    });
+</script>
+
+<section id="reviews">
+    <h2>Çfarë thonë klientët tanë</h2>
+    <div class="review">
+        <div class="client-photo">
+            <img src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?ga=GA1.1.212279670.1733412943&semt=ais_hybrid" alt="Klienti 1">
+        </div>
+        <div class="review-content">
+            <p><strong>Erjon M.</strong> - "Shërbimi ka qenë i shkëlqyer! E vlerësoj shumë komunikimin e lehtë dhe të shpejtë me doktorin. Do të vij përsëri!"</p>
+            <div class="rating">
+                <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+        </div>
+    </div>
+    <div class="review">
+        <div class="client-photo">
+            <img src="https://img.freepik.com/free-photo/lovable-asian-woman-with-curly-hair-smiling-camera-studio-shot-charming-japanese-model-with-white-flowers_197531-14571.jpg?t=st=1737992739~exp=1737996339~hmac=64c119b10083821c752c479cc39b01587faea1d753304d25af0e130aab4f849b&w=1380" alt="Klienti 2">
+        </div>
+        <div class="review-content">
+            <p><strong>Arta D.</strong> - "Konsulta ishte shumë profesionale dhe mjekët janë të kujdesshëm dhe të shpejtë në reagim."</p>
+            <div class="rating">
+                <span>&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <p>&copy; 2025 Shërbime Shëndetësore. Të drejtat e rezervuara.</p>
+</footer>
+
+</body>
+</html>

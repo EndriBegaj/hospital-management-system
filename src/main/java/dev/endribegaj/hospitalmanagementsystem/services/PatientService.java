@@ -18,4 +18,5 @@ public interface PatientService {
 
     void deleteById(long id);
 
+    Patient findByFirstNameAndLastName(String firstName, String lastName);
 }
